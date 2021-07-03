@@ -1,25 +1,32 @@
-import logo from './logo.svg';
+import React from 'react';
 import './App.css';
+import AppStyle from './style';
+import { Layout } from 'antd';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import YaziListesi from './components/YaziListesi';
+import YaziDetayi from './components/YaziDetayi';
+import Footer from './pages/Footer';
+import Header from './pages/Header';
+import YaziFormu from './components/YaziFormu';
 
-function App() {
+const { Sider, Content } = Layout;
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <AppStyle>
+        <Layout className='siteContainer'>
+          <Header />
+
+          <Content style={{ display: 'flex' }}>
+            <Route path='/' exact component={YaziListesi} />
+            <Route path='/posts/:id' component={YaziDetayi} />
+            <Route path='/yazi-olustur' component={YaziFormu} />
+          </Content>
+        </Layout>
+      </AppStyle>
+      <Footer />
+    </Router>
   );
-}
+};
 
 export default App;
