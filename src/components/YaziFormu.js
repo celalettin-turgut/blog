@@ -16,7 +16,7 @@ const YaziFormu = () => {
       .catch(error => console.log(error));
   };
 
-  console.log('YaziOlustur');
+  console.log('YaziFormu');
 
   const layout = {
     labelCol: { span: 4 },
