@@ -1,22 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button, Form, Input } from 'antd';
-import axios from 'axios';
+import { api } from '../api';
 import { useHistory } from 'react-router-dom';
 import { YaziFormuStyle } from '../style';
+import { useEffect } from 'react';
 
-const YaziFormu = () => {
+const YaziFormu = props => {
   const history = useHistory();
-  //const [form] = Form.useForm();
+  const [yazi, setYazi] = useState(props?.yazi);
+
+  console.log('Yazi', yazi);
 
   const onFinish = values => {
-    console.log(values);
-    axios
-      .post(`https://react-yazi-yorum.herokuapp.com/posts`, values)
+    api()
+      .post(`/posts`, values)
       .then(() => history.push('/'))
       .catch(error => console.log(error));
   };
-
-  console.log('YaziFormu');
 
   const layout = {
     labelCol: { span: 4 },
@@ -30,6 +30,10 @@ const YaziFormu = () => {
   return (
     <YaziFormuStyle>
       <Form
+        initialValues={{
+          title: yazi?.title || '',
+          content: yazi?.content || '',
+        }}
         className='form'
         //form={form}
         {...layout}

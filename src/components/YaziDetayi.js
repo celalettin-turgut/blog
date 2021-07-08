@@ -1,9 +1,8 @@
-import axios from 'axios';
+import { api } from '../api';
 import React, { useEffect, useState } from 'react';
 import Yorum from './Yorum';
-//import YorumOku from './YorumOku';
-//import YorumYaz from './YorumYaz';
-import { Typography } from 'antd';
+import { Link } from 'react-router-dom';
+import { Typography, Button } from 'antd';
 
 const { Title } = Typography;
 
@@ -12,8 +11,8 @@ const YaziDetayi = props => {
   const [yaziDetayi, setYaziDetayi] = useState('');
 
   useEffect(() => {
-    axios
-      .get(`https://react-yazi-yorum.herokuapp.com/posts/${id}`)
+    api()
+      .get(`/posts/${id}`)
       .then(response => setYaziDetayi(response.data))
       .catch(error => console.log(error));
   }, [id]);
@@ -31,6 +30,8 @@ const YaziDetayi = props => {
     >
       <Title>{yaziDetayi.title}</Title>
       <p>{yaziDetayi.created_at}</p>
+      <Link to={`/posts/${id}/edit`}>Düzenle</Link>
+      <Button type='default'>Sil</Button>
       <p>{yaziDetayi.content}</p>
       {/* <YorumOku yorumlar={yorumlar} />
       <YorumYaz id={id} /> */}

@@ -1,24 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import YorumYaz from './YorumYaz';
 import YorumOku from './YorumOku';
-import axios from 'axios';
+import { api } from '../api';
 
 const Yorum = ({ id }) => {
   const [yorumlar, setYorumlar] = useState([]);
 
   useEffect(() => {
-    axios
-      .get(`https://react-yazi-yorum.herokuapp.com/posts/${id}/comments`)
+    api()
+      .get(`/posts/${id}/comments`)
       .then(response => setYorumlar(response.data));
   }, [id]);
 
   const handleYorum = values => {
     console.log(values);
-    axios
-      .post(
-        `https://react-yazi-yorum.herokuapp.com/posts/${id}/comments`,
-        values
-      )
+    api()
+      .post(`/posts/${id}/comments`, values)
       .then(response => setYorumlar([...yorumlar, response.data]))
       .catch(error => console.log(error));
   };

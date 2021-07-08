@@ -7,7 +7,8 @@ import YaziListesi from './components/YaziListesi';
 import YaziDetayi from './components/YaziDetayi';
 import Footer from './pages/Footer';
 import Header from './pages/Header';
-import YaziFormu from './components/YaziFormu';
+import YaziEkle from './components/YaziEkle';
+import YaziDuzenle from './components/YaziDuzenle';
 
 const { Sider, Content } = Layout;
 const App = () => {
@@ -19,8 +20,9 @@ const App = () => {
 
           <Content style={{ display: 'flex' }}>
             <Route path='/' exact component={YaziListesi} />
-            <Route path='/posts/:id' component={YaziDetayi} />
-            <Route path='/yazi-olustur' component={YaziFormu} />
+            <Route path='/posts/:id' exact component={YaziDetayi} />
+            <Route path='/yazi-ekle' component={YaziEkle} />
+            <Route path='/posts/:id/edit' component={YaziDuzenle} />
           </Content>
         </Layout>
       </AppStyle>
