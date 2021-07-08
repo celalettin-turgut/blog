@@ -9,13 +9,26 @@ const YaziFormu = props => {
   const history = useHistory();
   const [yazi, setYazi] = useState(props?.yazi);
 
-  console.log('Yazi', yazi);
+  console.log('YaziFormu props', props);
 
   const onFinish = values => {
-    api()
-      .post(`/posts`, values)
-      .then(() => history.push('/'))
-      .catch(error => console.log(error));
+    if (props.yazi?.title) {
+      api()
+        .put(`/posts/${yazi.id}`, values)
+        .then(response => {
+          console.log(response);
+          history.push(`/posts/${yazi.id}`)
+        })
+        .catch(error => console.log(error));
+    } else {
+      api()
+        .post(`/posts`, values)
+        .then(() => {
+          console.log(values);
+          history.push('/');
+        })
+        .catch(error => console.log(error));
+    }
   };
 
   const layout = {
